@@ -1,30 +1,29 @@
 $(function(){
 
-    var matchURL = function(input) {
+    $('#submit').on('click', function () {
+        var formInput = $('#url').val();
+        $.ajax('http://domains.bootname.com/api/v1/domain/' + formInput, {
+            type: 'GET',
+            dataType: 'JSONP',
+//            data: {'callback' : jQuery123},
+            success: function (results) {
+                console.log(results);
+                results.forEach(function(display){
+                    $('#outcome').text("Available Names: " + display.available + display.domain);
+                    if(display.available){
+                        $('#outcome').text("Your domain is available!").css("color", "green");
+                    } else{
+                        $('#outcome').text("Your domain is unavailable! but this one is: " + display.domain + "!").css("color", "red");
+                    }
+                });
 
-        $('submit').on('click', function () {
-            var formInput = $('url').val();
+            },
+            error: function (error) {
 
-            $.ajax('http://domains.bootname.com/', {
-                type: 'POST',
-                dataType: 'JSONP',
-                success: function (results) {
-                    var url = "";
-                        if(url == formInput){
-                            $('div').text("Your domain is unavailable!").addClass("addGreen");
-                        } else {
-                            $('div').text("Your domain is available!").addClass("addGreen");
-                        };
-                },
-                error: function (error) {
-                    alert("Error Message");
-                }
-            });
+            }
         });
-    }
+    });
 
-    matchURL();
+
 });
-
-
 
