@@ -1,0 +1,13 @@
+body {
+    font-family: 'Droid Serif', sans-serif;
+    background-color: #F6F5E0;
+    padding-bottom: 50px;
+}
+
+.addGreen{
+    color: lawngreen;
+}
+
+.addRed{
+    color:red;
+}
